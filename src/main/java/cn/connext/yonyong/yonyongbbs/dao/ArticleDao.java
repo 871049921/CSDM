@@ -3,10 +3,13 @@ package cn.connext.yonyong.yonyongbbs.dao;
 import cn.connext.yonyong.yonyongbbs.entity.Article;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
 
 @Repository
 public interface ArticleDao {
@@ -16,6 +19,13 @@ public interface ArticleDao {
      * @return
      */
     List<Article> queryAllArticle();
+
+    /**
+     * 按标题查询文章
+     * @return
+     */
+    List<Article> queryArticleByTitle(@Param("title") String title);
+
     /**
      * 分页查询所有文章
      */

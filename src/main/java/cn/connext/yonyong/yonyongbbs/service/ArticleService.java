@@ -13,6 +13,8 @@ public interface ArticleService {
      * @return
      */
     List<Article> queryAllArticle();
+
+    List<Article> queryArticleByTitle(String title);
     /**
      * 根据文章id查询文章
      * @param id

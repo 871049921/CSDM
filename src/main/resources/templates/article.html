@@ -18,14 +18,36 @@
     <link href="https://fonts.googleapis.com/css?family=Kanit:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="js/article.js"></script>
 </head>
 
 <body>
 
 <nav>
     <div class="logo">
-        <a href="/">返回<em>大厅</em></a>
+        <a href="/"><img src="img/csdm.png" height="70px" alt=""/></a>
     </div>
+
+    <div class="logo">
+        <a href="/">系统首页</a>
+    </div>
+    <div class="logo">
+        <a href="/toarticle">所有文章</a>
+    </div>
+    <div class="logo">
+        <a href="/tomyarticle">我的文章</a>
+    </div>
+    <div class="logo">
+        <a href="/topermission">权限管理</a>
+    </div>
+
+    <div class="logo" style="margin-top: 25px;margin-right: 100px;float: right">
+        <form class="form-inline" method="post" action="/searcharticle">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchArticleTitle" id="searchArticleTitle">
+            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchArticle">Search</input>
+        </form>
+    </div>
+
     <div class="menu-icon">
         <span></span>
     </div>
@@ -86,10 +108,10 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <ul class="page-number">
-                            <li class="active"><a href="#" th:href="@{page(page=1)}"><<</a></li>
-                            <li><a href="#" th:href="@{page(page=${page}-1)}"><</a></li>
-                            <li><a href="#" th:href="@{page(page=${page}+1)}">></a></li>
+                        <ul class="page-number" >
+                            <li class="active"><a href="#" th:if="${page} == 1" th:href="@{page(page=1)}"><<</a></li>
+                            <li><a href="#" th:if="${page} == 0" th:href="@{page(page=${page}-1)}"><</a></li>
+                            <li><a href="#" th:if="${page} == 2" th:href="@{page(page=${page}+1)}">></a></li>
                             <li><a th:text="${page}"></a></li>
                         </ul>
                     </div>
@@ -172,6 +194,5 @@
 
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
-
 </body>
 </html>

@@ -27,6 +27,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> queryArticleByTitle(String title) {
+        return articleDao.queryArticleByTitle("%" + title + "%");
+    }
+
+    @Override
 //    @Cacheable(value="selectArticleById-key")
     public Article selectArticleById(int id) {
         return articleDao.selectArticleById(id);

@@ -34,6 +34,27 @@ $("#addArticleButton").on("click",function () {
         }
     });
 });
+<!-- 11111111111111-->
+$('#searchArticle').on("click",function () {
+    alert("searchArticle!");
+    var searchArticleTitle=$("#searchArticleTitle").val();
+    var data={
+        searchArticleTitle:searchArticleTitle,
+    };
+    if (searchArticleTitle==""){
+        alert("搜索不能为空！");
+        return false;
+    }
+    $.ajax({
+        type:"POST",
+        url : "searcharticle",
+        data : data,
+        dataType : 'json',
+        success : function(msg) {
+            // asdfasdfasdfasdfasdkjfhsadklhfjashdviluabdivbdavhwd<!-- -->
+        }
+    });
+});
 
 $("#editArticleButton").on("click",function () {
     var editArticleTitle=$("#editArticleTitle").val();

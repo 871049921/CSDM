@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -184,6 +185,40 @@ public class JumpController {
         return "article";
     }
 
+    @RequestMapping("/searcharticle")
+    public String searcharticle(HttpSession session, Model model, @RequestParam String searchArticleTitle){
+        //不启用排序
+//        List<Article> articleList=articleService.selectAllArticle(0);
+        //启用排序
+        System.out.println(searchArticleTitle);
+        List<Article> articleList = articleService.queryArticleByTitle(searchArticleTitle);
+
+        List<ShowArticle> list= new ArrayList<>();
+        for(Article t:articleList){
+            ShowArticle showArticle=new ShowArticle();
+            showArticle.setArticle_id(t.getId());
+            showArticle.setArticle_author(t.getAuthor());
+            showArticle.setArticle_date(t.getDate());
+            showArticle.setArticle_title(t.getTitle());
+            showArticle.setCount(replyService.selectAllReplyByArticleID(t.getId()).size()==0?0:replyService.selectAllReplyByArticleID(t.getId()).size());
+            showArticle.setReply_date(replyService.selectAllReplyByArticleID(t.getId()).size()==0?null:replyService.selectAllReplyByArticleID(t.getId()).get(0).getDate());
+            list.add(showArticle);
+        }
+        list= ArticleSort.articleSort(list);
+        try {
+            model.addAttribute("list0",list.get(0));
+            model.addAttribute("list1",list.get(1));
+            model.addAttribute("list2",list.get(2));
+            model.addAttribute("page",1);
+        } catch (Exception e) {
+
+        }
+        System.out.println("listSize:" + list.size());
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("title" + list.get(i).getArticle_title());
+        }
+        return "article";
+    }
 
     @RequestMapping("/tomyarticle")
     public String tomyarticle(HttpSession session, Model model, HttpServletResponse response){

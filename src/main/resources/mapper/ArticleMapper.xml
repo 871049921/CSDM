@@ -32,6 +32,10 @@
         select * from article where id=#{id}
     </select>
 
+    <select id="queryArticleByTitle" parameterType="String" resultMap="articleMap">
+        select * from article where title like #{title}
+    </select>
+
     <insert id="addArticle">
         insert into article(userid,title,author,date,content) values (#{userid},#{title},#{author},#{date},#{content})
     </insert>
