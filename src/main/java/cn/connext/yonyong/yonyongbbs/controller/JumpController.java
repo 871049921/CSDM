@@ -217,7 +217,7 @@ public class JumpController {
         for (int i = 0; i < list.size(); i++) {
             System.out.println("title" + list.get(i).getArticle_title());
         }
-        return "article";
+        return "article1";
     }
 
     @RequestMapping("/tomyarticle")
